@@ -1,0 +1,572 @@
+# ----------------------------------------------------------------------------------------------- #
+#                                            Versión                                              #
+# ----------------------------------------------------------------------------------------------- #
+
+version: "3.1"
+
+# ----------------------------------------------------------------------------------------------- #
+#                                              NLU                                                #
+# ----------------------------------------------------------------------------------------------- #
+
+nlu:
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: greet
+  examples: |
+    - hola
+    - holis
+    - buenas
+    - holanda
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hi bot
+    - hi again
+    - hi folks
+    - hi Mister
+    - hi pal!
+    - hey there
+    - greetings
+    - hello everybody
+    - hello is anybody there
+    - hello robot
+    - hallo
+    - heeey
+    - hi hi
+    - hey hey
+    - hi?
+    - yo
+    - hello friend
+    - hey bot!
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - Holiiis
+    - Holaaa
+    - Holaa
+    - Bonjour
+    - Buenardaas
+    - Buenaaas
+    - Buenaaasss
+    - Holis
+    - Hiiiiiiiiiiiii
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: goodbye
+  examples: |
+    - adiós
+    - chau
+    - chauchis
+    - see ya
+    - chao
+    - nos vemos
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+    - Bye bye :)
+    - Bye bye
+    - See ya
+    - Bye bye <3
+    - Bye bye, amigo :)
+    - Bye bye, my friends :D
+    - see ya :D
+    - Bye bye baby
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: name
+  examples: |
+    - me llamo [PERSON](name)
+    - mi nombre es [PERSON](name)
+    - soy [PERSON](name)
+    - my name is [PERSON](name)
+    - soy [PERSON](name)
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: greet+name
+  examples: |
+    - Buenas, me llamo [PERSON](name)
+    - ¡Hola! Mi nombre es [PERSON](name)
+    - Holiis, soy [PERSON](name)
+    - Holanda, me llamo [PERSON](name)
+    - Hola, soy [PERSON](name)
+    - Beunaaaas, mi nombre es [PERSON](name)
+    - Hello there, me llamo [PERSON](name)
+    - Buenas tardes, mi nombre es [PERSON](name)
+    - Hi, soy [PERSON](name)
+    - Holis, me llamo [PERSON](name)
+    - Holanda, me llamo [PERSON](name)
+    - Bonjour, mi nombre es [PERSON](name)
+    - Oi, soy [PERSON](name)
+    - Hi, me llamo [PERSON](name)
+    - Holu, my name is [PERSON](name)
+    - hola, me llamo [PERSON](name)
+    - holis, soy [PERSON](name)
+    - buenas, me dicen [PERSON](name)
+    - holanda, mi nombre es [PERSON](name)
+    - hey, mi nombre es [PERSON](name)
+    - hello, my name is [PERSON](name)
+    - hi, my name is [PERSON](name)
+    - hello there, my name is [PERSON](name)
+    - good morning, I'm [PERSON](name)
+    - good evening, je suis [PERSON](name)
+    - moin, je m'apelle [PERSON](name)
+    - hi bot, my name is [PERSON](name)
+    - hi again, I'm [PERSON](name)
+    - hi folks, my name is [PERSON](name)
+    - hi Mister, je suis [PERSON](name)
+    - hi pal!, my name is [PERSON](name)
+    - hey there, I'm [PERSON](name)
+    - greetings, people call me [PERSON](name)
+    - hello everybody, they usually call me [PERSON](name)
+    - hello is anybody there, my name [PERSON](name)
+    - hello robot, I'm [PERSON](name)
+    - hallo, it's [PERSON](name)
+    - Buenas, soy [PERSON](name)
+    - heeey, it's [PERSON](name)
+    - hi hi, it's [PERSON](name)
+    - hey hey, they call me [PERSON](name)
+    - hi? My name is [PERSON](name)
+    - yo, I'm [PERSON](name)
+    - hello friend, my name is [PERSON](name)
+    - hey bot!, me llamo [PERSON](name)
+    - let's go, me llamo [PERSON](name)
+    - hey dude, it's [PERSON](name) who is talking
+    - goodmorning, my name is [PERSON](name)
+    - goodevening, I'm [PERSON](name)
+    - ¡Buenas! Me llamo [PERSON](name)
+    - good afternoon, it's [PERSON](name)
+    - Holiiis, me llamo [PERSON](name)
+    - Holaaa, me dicen [PERSON](name)
+    - Holaa, me llaman [PERSON](name)
+    - Bonjour, je m'apelle [PERSON](name)
+    - Buenardaas, me llamo [PERSON](name)
+    - Buenaaas, me llamo [PERSON](name)
+    - Buenaaasss, mi nombre es [PERSON](name)
+    - Holis, me llamo [PERSON](name)
+    - Hiiiiiiiiiiiii, soy [PERSON](name)
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: random_trending_video
+  examples: |
+    - quiero ver un video aleatorio
+    - quiero ver un video aleatorio en tendencia
+    - quiero ver un video random
+    - i want to see a random trending topic
+    - quiero ver un video al azar
+    - me gustaría ver un video al azar
+    - quiero un video en tendencia
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: thankful
+  examples: |
+    - genial, gracias!
+    - muchas gracias
+    - muchísimas gracias, un saludo
+    - gracias yotu
+    - mil gracias
+    - graciela
+    - ty
+    - thank you
+    - Gracias!
+    - Thank you <3
+    - Gracias! :D
+    - Ty :)
+    - Ty so much :)
+    - Gracias :)
+    - Ty so so much
+    - Muchas gracias :D
+    - Ty so much :D
+    - ty so so much, cutie :)
+    - ty so much for the video :)
+    - ty so much, my friend
+    - ty sooo much for the playlist <3
+    - Muy agradecido por tu ayuda
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: check_charisma
+  examples: |
+    - /charisma
+    - /carisma
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: bot_functions
+  examples: |
+    - ¿Cuáles son tus funciones?
+    - ¿Qué puedo pedirte?
+    - ¿Qué puedes hacer?
+    - ¿Qué te puedo pedir?
+    - ¿Cuáles son tus límites?
+    - ¿Qué podés hacer?
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: asking_for_recommendation
+  examples: |
+    - ¿Podrías recomendarme algo para ver?
+    - ¿Que me recomendarías?
+    - Me interesaría que me recomiendes algo
+    - ¿Alguna recomendación?
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: recommendation_according_user_tastes
+  examples: |
+    - ¿Podrías recomendarme un [video](format) acorde a mis gustos?
+    - ¿Podrías recomendarme un [canal]{"entity": "format", "value": "channel"} según mis gustos?
+    - ¿Podrías buscar un [video](format) acorde a mis gustos?
+    - ¿Podrías recomendarme un [video](format) que pueda gustarme?
+    - ¿Serías tan amable de recomendarme un [video](format) según mis gustos?
+    - ¿Me recomendás una [playlist](format) acorde a mis gustos?
+    - Recomendame un [video](format)
+    - Recomendame un [canal]{"entity": "format", "value": "channel"}
+    - ¿Podrías recomendarme una [playlist](format)?
+    - Quiero que me recomiendes un [canal]{"entity": "format", "value": "channel"} acorde a mis gustos
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: asking_for_general_recommendation
+  examples: |
+    - quiero ver un [video](format)
+    - me gustaría ver un [video](format)
+    - quiero que me recomiendes un [canal]{"entity": "format", "value": "channel"}
+    - estoy interesado en ver un [video](format)
+    - me interesa ver un [canal]{"entity": "format", "value": "channel"}
+    - ¿podrías recomendarme un [canal]{"entity": "format", "value": "channel"}?
+    - ¿tendrías alguna [playlist](format) buena?
+    - Quiero ver un [video](format)
+    - Quiero ver un [videoardo](format)
+    - Estoy interesado en ver un [video](format)
+    - Quiero ver un [videardo]{"entity": "format", "value": "video"}
+    - Me gustaría buscar una [playlist](format)
+    - Me gustaría buscar una [playlist](format)
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: asking_for_general_recommendation+topic
+  examples: |
+    - quiero ver un [video](format) de gatos
+    - me gustaría ver un [videardo]{"entity": "format", "value": "video"} de perros
+    - quiero que me recomiendes un [channel](format) de matemáticas
+    - estoy interesado en ver un [vídeo]{"entity": "format", "value": "video"} de física cuántica
+    - me interesa ver un [canal]{"entity": "format", "value": "channel"} de la Revolución de Mayo
+    - ¿podrías recomendarme un [canal de youtube]{"entity": "format", "value": "channel"} de Argentina vs. Brasil?
+    - ¿tendrías alguna [playlist](format) buena de Rock Nacional?
+    - Quiero ver un [video](format) de chatbots
+    - Quiero ver [videos]{"entity": "format", "value": "video"} de gatos japoneses
+    - Quiero ver [videos]{"entity": "format", "value": "video"} de gatos japoneses
+    - Quiero ver un [videoardo](format) de Machine Learning
+    - Quiero buscar un [canal]{"entity": "format", "value": "channel"} sobre teorías conspirativas
+    - Estoy interesado en ver un [video](format) de peces exóticos
+    - quiero ver una [lista]{"entity": "format", "value": "playlist"} de gatos
+    - quiero ver una [playlist]{"entity": "format", "value": "playlist"} de gatos
+    - Quiero ver un [videardo]{"entity": "format", "value": "video"} de comida callejeras
+    - Quiero ver [videos]{"entity": "format", "value": "video"} de gatos japoneses
+    - Me gustaría buscar una [lista]{"entity": "format", "value": "playlist"} de frases motivaciones
+    - Me gustaría buscar una [lista]{"entity": "format", "value": "playlist"} de electrónica digital
+    - Me gustaría buscar una [lista]{"entity": "format", "value": "playlist"} de electrónica digital
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: format
+  examples: |
+    - un [video](format)
+    - [video](format)
+    - [canal](format)
+    - una [playlist](format)
+    - [playlist](format)
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: topic
+  examples: |
+    - matemática
+    - maths
+    - física
+    - physics
+    - música
+    - music
+    - videojuegos
+    - videogames
+    - cocina
+    - cooking
+    - terror
+    - horror
+    - filosofía
+    - philosophy
+    - de física
+    - de física cuántica de universidad
+    - de boxeo profesional
+    - de professional skateboarding
+    - de gastronomía italiana
+    - de jamaica
+    - de música de los 80's
+    - de Argentina vs Bolivia
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: affirm
+  examples: |
+    - sí
+    - sipi
+    - yes
+    - y
+    - obvio
+    - sip
+    - chi
+    - I do
+    - of course
+    - por supuesto
+    - obvious
+    - sim
+    - oui
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: deny
+  examples: |
+    - no
+    - nop
+    - nopi
+    - not
+    - negativo
+    - nou
+    - I don't
+    - never
+    - ni en pedo
+    - ni estando loco
+    - ni loco
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: mood_unhappy
+  examples: |
+    - mi día estuvo horrible
+    - my day was horrible
+    - estoy triste
+    - I am sad
+    - no me siento muy bien
+    - I don't feel very well
+    - estoy decepcionado
+    - I am disappointed
+    - super triste
+    - super sad
+    - estoy tan triste
+    - I'm so sad
+    - me siento desanimado
+    - me siento triste
+    - sad
+    - me siento muy triste
+    - very sad
+    - me siento muy mal
+    - unhappy
+    - no muy bien
+    - not good
+    - not very good
+    - me siento extremadamente triste
+    - I feel extremly sad
+    - I feel so saad
+    - I feel so sad
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: bot_challenge
+  examples: |
+    - sos un bot?
+    - estoy hablando con un bot?
+    - estoy conversando con un bot?
+    - sos un robot?
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: bot_favourite_videos
+  examples: |
+    - cuál es tu video favorito?
+    - ¿podrías mandarme uno de tus videos favoritos?
+    - me gustaría saber cuál es tu video favorito
+    - me mandás uno de tus videos favoritos
+    - quiero ver uno de tus videos favoritos
+    - cuáles son tus videos favoritos
+    - me encantaría ver uno de tus videos favoritos
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: restart
+  examples: |
+    - /restart
+    - /reset
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: ignore
+  examples: |
+    - /start
+    - /stop
+    - /rasa
+    - /run
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: insult
+  examples: |
+    - Suripanta
+    - Casquivano
+    - Mangante
+    - Zascandil
+    - Estafermo
+    - Mandilón
+    - Esputo
+    - Cutre
+    - Escolimoso
+    - Tocapelotas
+    - Cenizo
+    - Babieca
+    - Energúmeno
+    - Cosiaca
+    - Disoluto
+    - Cagalindes
+    - Catacaldos
+    - Farfante
+    - Bocachancla
+    - Gazmuño
+    - Hideputa
+    - Julandrón
+    - Lerdo
+    - Quitahipos
+    - Robaperas
+    - Sacamuelas
+    - Zampalimosnas
+    - Petimetre
+    - Impertinente
+    - Ganapán
+    - Mamacallos
+    - Arrima cebolleta
+    - Cagarruta
+    - Escornacabras
+    - Malasombra
+    - Matacandiles
+    - Pichabrava
+    - Soplagaitas
+    - Cabrón
+    - Imbécil
+    - Gilipollas
+    - Capullo
+    - Caraculo
+    - Carajote
+    - Zampabollos
+    - Huevón
+    - Lameculos
+    - Merluzo
+    - Panoli
+    - Pardillo
+    - Pelagatos
+    - Perroflauta
+    - Zoquete
+    - Metemuertos
+    - Mamporrero
+    - Lamecharcos
+    - Gilipuertas
+    - Cretino
+    - Mamón
+    - Pinche huevón
+    - Vete a la verga
+    - Chinga tu madre
+    - Pendejo
+    - Chingar
+    - Puta madre
+    - Mama huevos
+    - Chachalaco
+    - Malacopa
+    - Chingaquedito
+    - Argüendero
+    - Hijo de la chingada
+    - Cascado
+    - Tontopollas
+    - Besugo
+    - Boquerón
+    - Zancajoso
+    - Patochá
+    - Pisha
+    - Farfollas
+    - Majara
+    - Cagueta
+    - Descastao
+    - Papafrita
+    - Mal Folla
+    - A japo tendío
+    - Apollardao
+    - Panxacontenta
+    - Capsigrany
+    - Estaquirot
+    - Caganaies
+    - Desmanyota
+    - Panarra
+    - Cagalló
+    - Cagamiques
+    - Desvergonyit
+    - Abellot
+    - Abusanenes
+    - Onso
+    - Pampana
+    - Garró
+    - Pelotudo
+    - Boludo
+    - Enfermo
+    - Down
+    - Estúpido
+    - Mierda
+    - Tonto
+    - Idiota
+    - Estúpido
+    - Hijo de puta
+    - Menso
+    - Basura
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: youtube_tutorial
+  examples: |
+    - ¿Me explicarías cómo usar YouTube?
+    - ¿Cómo se usa YouTube?
+    - ¿Cómo se utiliza YouTube?
+    - ¿Qué pasos debo seguir para usar YouTube?
+    - ¿Cómo hago para entrar a YouTube y buscar videos?
+    - Explicame cómo usar YouTube
+
+# ----------------------------------------------------------------------------------------------- #
+
+- intent: video_prediction
+  examples: |
+    - ¿Creés que este video podría gustarme https://www.youtube.com/watch?v=?
+    - ¿Crees que este video sea para mí https://www.youtube.com/watch?v=?
+    - ¿Me gustará este video https://www.youtube.com/watch?v=?
+    - https://www.youtube.com/watch?v= es para mí?
+    - https://www.youtube.com/watch?v= me gustará?
+    - este video me gustará? https://www.youtube.com/watch?v=
+    - me gustará https://www.youtube.com/watch?v=?? 
+
+# ----------------------------------------------------------------------------------------------- #

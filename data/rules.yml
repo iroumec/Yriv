@@ -1,0 +1,296 @@
+version: "3.1"
+
+# ----------------------------------------------------------------------------------------------- #
+#                                             Rules                                               #
+# ----------------------------------------------------------------------------------------------- #
+
+rules:
+
+# ----------------------------------------------------------------------------------------------- #
+#                                          Welcome User                                           #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Welcome, User
+  # conversation_start: true
+  steps:
+  - slot_was_set:
+    - logged_in: False
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+#                                           User Name                                             #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: User Name
+  steps:
+  - intent: name
+  - action: action_get_name
+
+# ----------------------------------------------------------------------------------------------- #
+#                                          Welcome Back                                           #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Welcome back, User
+  # conversation_start: true
+  steps:
+  - slot_was_set:
+    - logged_in: True
+  - intent: greet
+  - action: utter_welcome_back
+
+# ----------------------------------------------------------------------------------------------- #
+#                                  What are bot's functions?                                      #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: What are bot's functions?
+  steps:
+    - intent: bot_functions
+    - action: action_bot_functions
+
+# ----------------------------------------------------------------------------------------------- #
+#                                        Goodbye User                                             #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Goodbye User
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+# ----------------------------------------------------------------------------------------------- #
+#                                   Do you think am I a bot?                                      #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Do you think am I a bot?
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+# ----------------------------------------------------------------------------------------------- #
+#                                 Ask for a video, get a video                                    #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a video, get a video - A
+  steps:
+  - slot_was_set:
+    - format: video
+  - intent: topic
+  - action: action_get_topic
+  - action: action_search_videos
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a video, get a video - B
+  steps:
+  - intent: asking_for_general_recommendation+topic
+  - slot_was_set:
+    - format: video
+  - action: action_get_topic
+  - action: action_search_videos
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a video, get a video - C
+  steps:
+  - intent: recommendation_according_user_tastes
+  - slot_was_set:
+    - format: video
+  - action: action_get_user_tastes_video
+  wait_for_user_input: false
+  
+# ----------------------------------------------------------------------------------------------- #
+#                                Ask for a channel, get a channel                                 #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a channel, get a channel - A
+  steps:
+  - slot_was_set:
+    - format: channel
+  - intent: topic
+  - action: action_get_topic
+  - action: action_search_channels
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a channel, get a channel - B
+  steps:
+  - intent: asking_for_general_recommendation+topic
+  - slot_was_set:
+    - format: channel
+  - action: action_get_topic
+  - action: action_search_channels
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a channel, get a channel - C
+  steps:
+  - intent: recommendation_according_user_tastes
+  - slot_was_set:
+    - format: channel
+  - action: action_get_user_tastes_channel
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+#                              Ask for a playlist, get a playlist                                 #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a playlist, get a playlist - A
+  steps:
+  - slot_was_set:
+    - format: playlist
+  - intent: topic
+  - action: action_get_topic
+  - action: action_search_playlists
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a playlist, get a playlist - B
+  steps:
+  - intent: asking_for_general_recommendation+topic
+  - slot_was_set:
+    - format: playlist
+  - action: action_get_topic
+  - action: action_search_playlists
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for a playlist, get a playlist - C
+  steps:
+  - intent: recommendation_according_user_tastes
+  - slot_was_set:
+    - format: playlist
+  - action: action_get_user_tastes_playlist
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+#                                  Get a Random Trending Topic                                    #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Get a random trending topic
+  steps:
+  - intent: random_trending_video
+  - action: action_get_random_trending_video
+
+# ----------------------------------------------------------------------------------------------- #
+#                                    Don't insult the bot!                                        #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Don't insult the bot!
+  steps:
+  - intent: insult
+  - action: utter_insult
+  - action: action_decrease_charisma
+  - action: action_listen
+
+# ----------------------------------------------------------------------------------------------- #
+#                              Be always thankful to the bot! :D                                  #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Be always thankful to the bot! :D
+  steps:
+  - intent: thankful
+  - action: utter_thankful
+  - action: action_increase_charisma
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+#                                            Ignore                                               #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ignore
+  steps:
+  - intent: ignore
+  - action: action_listen
+
+# ----------------------------------------------------------------------------------------------- #
+#                                   Yriv's Favourite Videos                                       #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Ask for Yriv's favourite videos
+  steps:
+  - intent: bot_favourite_videos
+  - action: action_show_bot_favourite_videos
+
+# ----------------------------------------------------------------------------------------------- #
+#                                     Check your Charisma                                         #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Check your charisma
+  steps:
+  - intent: check_charisma
+  - action: action_return_charisma
+
+# ----------------------------------------------------------------------------------------------- #
+#                                   Restart the Conversation                                      #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Restart the conversation with Yriv
+  steps:
+  - intent: restart
+  - action: action_restart
+
+# ----------------------------------------------------------------------------------------------- #
+#                            The user doesn't deserve be assisted by Yriv                         #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: The user doesn't deserve be assisted by Yriv
+  steps:
+  - slot_was_set:
+    - charisma: enemy
+  - action: utter_finishing_session
+  - action: action_restart
+
+# ----------------------------------------------------------------------------------------------- #
+#                                 The user wants a YouTube tutorial                               #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: The user wants a YouTube tutorial
+  steps:
+  - intent: youtube_tutorial
+  - action: action_show_youtube_tutorial
+
+# ----------------------------------------------------------------------------------------------- #
+#                                          Did you like it?                                       #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Did you like it?
+  steps:
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  wait_for_user_input: false
+
+# ----------------------------------------------------------------------------------------------- #
+#                                         Video Prediction                                        #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Video prediction
+  steps:
+  - intent: video_prediction
+  - action: action_video_prediction
+
+# ----------------------------------------------------------------------------------------------- #
+#                                           Mood Unhappy                                          #
+# ----------------------------------------------------------------------------------------------- #
+
+- rule: Mood unhappy
+  steps:
+  - intent: mood_unhappy
+  - action: action_cheer_up

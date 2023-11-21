@@ -1,0 +1,70 @@
+﻿Utilizar: CMD con permisos de administrador.
+
+---------------------------------------------------------------------------------------------------
+                                    Ir al entorno de Rasa
+---------------------------------------------------------------------------------------------------
+
+cd C:\Users\inaki\OneDrive\Documentos\Yriv
+
+conda activate Yriv
+
+---------------------------------------------------------------------------------------------------
+                                Activar el Endpoint de Actions
+---------------------------------------------------------------------------------------------------
+
+-> En el entorno de Rasa, en una consola aparte:
+
+rasa run actions
+
+---------------------------------------------------------------------------------------------------
+                                            Ngrok
+---------------------------------------------------------------------------------------------------
+
+# Autenticar la cuenta
+
+ngrok config add-authtoken 2UGZzITRg5IKjD4cCeqHAodaxG3_2GfMqRA4JZkGqgMbSJULc
+
+# Correr el servidor
+
+ngrok http --domain=saving-large-chigger.ngrok-free.app 5005
+
+---------------------------------------------------------------------------------------------------
+                                        Rasa Shell
+---------------------------------------------------------------------------------------------------
+
+/stop
+
+/restart
+
+---------------------------------------------------------------------------------------------------
+                                            Pyswip
+---------------------------------------------------------------------------------------------------
+
+import pyswip as Prolog
+
+prolog = Prolog()
+
+# Devolver los comando de pyswip, con ejemplos de cómo se utilizan
+help(prolog)
+
+---------------------------------------------------------------------------------------------------
+                                        Libraries
+---------------------------------------------------------------------------------------------------
+
+conda deactivate  # deactivate the current environment if active
+conda env remove --name Yriv
+
+conda create --name Yriv python=3.9
+conda activate Yriv
+
+pip install rasa
+pip install google-api-python-client
+
+# Al parecer, la versión estándar de pyswip (la que se instala con "pip install pyswip" tiene problemas.
+# Se recomienda instalar la siguiente versión.
+
+conda install git
+pip install git+https://github.com/yuce/pyswip@master#egg=pyswip
+
+pip install rasa[spacy]
+python -m spacy download es_core_news_md

@@ -1,0 +1,649 @@
+# ----------------------------------------------------------------------------------------------- #
+#                                            Versión                                              #
+# ----------------------------------------------------------------------------------------------- #
+
+version: "3.1"
+
+# ----------------------------------------------------------------------------------------------- #
+#                                            STORIES                                              #
+# ----------------------------------------------------------------------------------------------- #
+
+stories:
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see a video - A
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: video
+  - slot_was_set:
+    - format: video
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: example
+  - action: action_search_videos
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see a video - B
+  steps:
+  - intent: greet+name
+  - action: action_get_name
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: video
+  - slot_was_set:
+    - format: video
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: example
+  - action: action_search_videos
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see a video - C
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: video
+  - slot_was_set:
+    - format: video
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: gastronomía italiana
+  - action: action_search_videos
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see a video - D
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: video
+  - slot_was_set:
+    - format: video
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: jamaica
+  - action: action_search_videos
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see a video - E
+  steps:
+  - intent: greet+name
+  - action: action_get_name
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation+topic
+    entities:
+    - format: video
+  - slot_was_set:
+    - format: video
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: True
+  - action: action_search_videos
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see a video - F
+  steps:
+  - intent: greet+name
+  - action: action_get_name
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation+topic
+    entities:
+    - format: video
+  - slot_was_set:
+    - format: video
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: True
+  - action: action_search_videos
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: say_goodbye
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see a video - G
+  steps:
+  - intent: greet+name
+  - action: action_get_name
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: recommendation_according_user_tastes
+  - slot_was_set:
+    - format: video
+  - action: action_get_user_tastes_video
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to search a channel - A
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: channel
+  - slot_was_set:
+    - format: channel
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: example
+  - action: action_search_channels
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to search a channel - B
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: channel
+  - slot_was_set:
+    - format: channel
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: gastronomía italiana
+  - action: action_search_channels
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to search a playlist - Example 1
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: playlist
+  - slot_was_set:
+    - format: playlist
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: jamaica
+  - action: action_search_playlists
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to search a playlist - Example 2
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: playlist
+  - slot_was_set:
+    - format: playlist
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: gastronomía italiana
+  - action: action_search_playlists
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - intent: thankful
+  - action: utter_thankful
+  - action: action_increase_charisma
+  - intent: goodbye
+  - action: utter_goodbye
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: playlist
+  - slot_was_set:
+    - format: playlist
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: música los 80's
+  - action: action_search_playlists
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to search a playlist - Example 3
+  steps:
+  - intent: greet+name
+  - action: action_get_name
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: playlist
+  - slot_was_set:
+    - format: playlist
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: gastronomía italiana
+  - action: action_search_playlists
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: playlist
+  - slot_was_set:
+    - format: playlist
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: gastronomía italiana
+  - action: action_search_playlists
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: playlist
+  - slot_was_set:
+    - format: playlist
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: gastronomía italiana
+  - action: action_search_playlists
+  - intent: recommendation_according_user_tastes
+  - slot_was_set:
+    - format: playlist
+  - action: action_get_user_tastes_playlist
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: playlist_search
+  steps:
+  - intent: greet+name
+  - action: action_get_name
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - checkpoint: playlist_search
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: general_playlist_search
+  steps:
+  - checkpoint: playlist_search
+  - intent: asking_for_general_recommendation
+    entities:
+    - format: playlist
+  - slot_was_set:
+    - format: playlist
+  - action: utter_asking_for_topic
+  - intent: topic
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: gastronomía italiana
+  - action: action_search_playlists
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: specific_playlist_search
+  steps:
+  - checkpoint: playlist_search
+  - intent: asking_for_general_recommendation+topic
+    entities:
+    - format: playlist
+  - slot_was_set:
+    - format: playlist
+  - action: action_get_topic
+  - slot_was_set:
+    - topic: True
+  - action: action_search_playlists
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+    - slot_was_set:
+      - charisma: unfriendly
+  - action: utter_user_liked
+  - or:
+    - intent: affirm
+    - intent: deny
+  - action: action_save_like_dislike
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see Yriv's favourite videos - A
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: bot_favourite_videos
+  - action: action_show_bot_favourite_videos
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see Yriv's favourite videos - B
+  steps:
+  - intent: greet+name
+  - action: action_get_name
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: bot_favourite_videos
+  - action: action_show_bot_favourite_videos
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: I want to see something
+  steps:
+    - intent: greet
+    - action: utter_welcome
+    - action: action_log_in
+    - slot_was_set:
+      - logged_in: true
+    - intent: asking_for_recommendation
+    - action: utter_asking_for_format
+    - intent: format
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: unhappy mood - A
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: mood_unhappy
+  - action: action_cheer_up
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: unhappy mood - B
+  steps:
+  - intent: greet
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: mood_unhappy
+  - action: action_cheer_up
+  - checkpoint: say_goodbye
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: unhappy mood - C
+  steps:
+  - intent: greet+name
+  - action: action_get_name
+  - action: utter_welcome
+  - action: action_log_in
+  - slot_was_set:
+    - logged_in: true
+  - intent: mood_unhappy
+  - action: action_cheer_up
+  - checkpoint: be_thankful
+
+# ----------------------------------------------------------------------------------------------- #
+
+# Las siguientes historias buscan no repetir una y otra vez, con ayuda de los checkpoints, líneas de código
+
+- story: Be thankful to Yriv
+  steps:
+  - checkpoint: be_thankful
+  - intent: thankful
+  - action: utter_thankful
+  - action: action_increase_charisma
+  - or:
+    - slot_was_set:
+      - charisma: friendly
+    - slot_was_set:
+      - charisma: neutral
+  - checkpoint: say_goodbye
+
+# ----------------------------------------------------------------------------------------------- #
+
+- story: Say goodbye to Yriv
+  steps:
+  - checkpoint: say_goodbye
+  - intent: goodbye
+  - action: utter_goodbye

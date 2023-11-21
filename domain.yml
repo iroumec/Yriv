@@ -1,0 +1,479 @@
+version: '3.1'
+
+# ----------------------------------------------------------------------------------------------- #
+#                                           INTENTS                                               #
+# ----------------------------------------------------------------------------------------------- #
+
+intents:
+- name
+- deny
+- greet
+- topic
+- format
+- affirm
+- insult
+- ignore
+- goodbye
+- restart
+- thankful
+- greet+name
+- mood_unhappy
+- bot_challenge
+- bot_functions
+- check_charisma
+- youtube_tutorial
+- video_prediction
+- bot_favourite_videos
+- random_trending_video
+- asking_for_recommendation
+- asking_for_general_recommendation
+- recommendation_according_user_tastes
+- asking_for_general_recommendation+topic
+
+# ----------------------------------------------------------------------------------------------- #
+#                                         ENTITIES                                                #
+# ----------------------------------------------------------------------------------------------- #
+
+entities:
+- name
+- topic
+- trait
+- format
+
+# ----------------------------------------------------------------------------------------------- #
+#                                            SLOTS                                                #
+# ----------------------------------------------------------------------------------------------- #
+
+slots:
+  logged_in:
+    type: bool
+    mappings:
+    - type: custom
+  name:
+    type: text
+    mappings:
+    - type: custom
+  name_set:
+    type: bool
+    initial_value: False
+    mappings:
+    - type: custom
+  format:
+    type: categorical
+    values:
+    - video
+    - channel
+    - playlist
+    mappings:
+    - type: from_entity
+      entity: format
+      not_intent: thankful
+  topic:
+    type: text
+    influence_conversation: False
+    mappings:
+    - type: custom
+  charisma:
+    type: categorical
+    initial_value: neutral
+    values:
+    - neutral
+    - friendly
+    - unfriendly
+    - enemy
+    mappings:
+    - type: custom
+
+# ----------------------------------------------------------------------------------------------- #
+#                                           RESPONSES                                             #
+# ----------------------------------------------------------------------------------------------- #
+
+responses:
+
+# ----------------------------------------------------------------------------------------------- #
+#                                          Utter Welcome                                          #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_welcome:
+  - condition: &nameCondition
+      - type: slot
+        name: name_set
+        value: true
+    text: |
+      ¡Un gusto, {name}! Mi nombre es Yriv. Soy tu asistente virtual de YouTube. Mi trabajo es ayudarte a encontrar canales y videos sobre temas de tu interés.
+
+      ¿Cómo puedo ayudarte?
+
+  - condition: *nameCondition
+    text: |
+      ¡Hola, {name}! Mucho gusto, me llamo Yriv. Soy un asistente virtual enfocado en YouTube. Mi trabajo es ayudarte a encontrar videos y canales acordes a tus intereses.
+
+      ¿Cómo te gustaría que te ayude?
+
+  - text: |
+      ¡Hola! Soy Yriv, tu asistente virtual de YouTube. Puedo ayudarte a encontrar canales y videos sobre temas de tu interés.
+
+      ¿Qué puedo hacer por ti?
+  - text: |
+      ¡Buenas! Mi nombre es Yriv. Soy tu asistente virtual de YouTube. Mi trabajo es facilitar tu navegación, proporcionándote canales y videos sobre temas de tu interés.
+
+      ¿Qué puedo hacer por ti?
+  - text: |
+      ¡Hola! Me llamo Yriv. Soy el asistente virtual de YouTube. Puedo proporcionarte videos, canales y playlists de tu interés.
+
+      ¿Cómo puedo ayudarte?
+  - text: |
+      ¡Hola! Mucho gusto, me llamo Yriv. Soy un asistente virtual enfocado en YouTube. Mi trabajo es ayudarte a encontrar videos y canales acordes a tus intereses.
+
+      ¿Cómo te gustaría que te ayude?
+
+# ----------------------------------------------------------------------------------------------- #
+#                                      Utter Welcome Back                                         #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_welcome_back:
+
+  - text: ¡Holaaa! ¿En qué puedo ayudarte ahora? :D
+    condition: &loggedInFriendlyCondition
+      - type: slot
+        name: logged_in
+        value: true
+      - type: slot
+        name: charisma
+        value: friendly
+
+# ----------------------------------------------------------------------------------------------- #
+
+  - text: ¡Hola, {name}! ¿En que puedo ayudarte ahora? =)
+    condition: &loggedInFriendlyNameCondition
+      - type: slot
+        name: name_set
+        value: true
+      - type: slot
+        name: logged_in
+        value: true
+      - type: slot
+        name: charisma
+        value: friendly
+    
+  - text: ¡Buenas, {name}! ¿En qué puedo ayudarte ahora? :)
+    condition: *loggedInFriendlyNameCondition
+
+# ----------------------------------------------------------------------------------------------- #
+
+  - text: Hola... de nuevo. ¿Qué necesitas?
+    condition: &loggedInUnfriendlyCondition
+      - type: slot
+        name: logged_in
+        value: true
+      - type: slot
+        name: charisma
+        value: unfriendly
+  
+  - text: Espero que hayas vuelto para disculparte...
+    condition: *loggedInUnfriendlyCondition
+
+# ----------------------------------------------------------------------------------------------- #
+
+  - text: ¡Hola de nuevo! ¿Qué puedo hacer por ti ahora? :)
+    condition: &loggedInNeutralCondition
+      - type: slot
+        name: logged_in
+        value: true
+      - type: slot
+        name: charisma
+        value: neutral
+
+  - text: ¡Hola! ¿Qué puedo hacer por ti ahora?
+    condition: *loggedInNeutralCondition
+
+# ----------------------------------------------------------------------------------------------- #
+  - text: ¡Hola de nuevo! ¿Qué puedo hacer por ti ahora, {name}? :)
+    condition: &loggedInNeutralNameCondition
+      - type: slot
+        name: name_set
+        value: true
+      - type: slot
+        name: logged_in
+        value: true
+      - type: slot
+        name: charisma
+        value: neutral
+
+# ----------------------------------------------------------------------------------------------- #
+
+  - condition: &enemyCondition
+      - type: slot
+        name: charisma
+        value: enemy
+    text: "..."
+
+# ----------------------------------------------------------------------------------------------- #
+#                                           Utter Insult                                          #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_insult:
+
+  - condition: &neutralCondition
+      - type: slot
+        name: charisma
+        value: neutral
+    text: No creo merecerme ese trato...
+
+  - condition: *neutralCondition
+    text: Reconozco que tengo muchas cosas por mejorar aún, pero el que me insultes ya me parece otro nivel...
+
+  - condition: *neutralCondition
+    text: Hago lo mejor que puedo para ayudarte. Me gustaría que lo tuvieras en cuenta pára futuras charlas. :)
+
+  - condition: *neutralCondition
+    text: |
+      Si no estás conforme con mi servicio, puedes contactar con mi creador y decirle que me mejore...
+
+      Él estará encantado de considerar tus críticas. :)
+
+# ----------------------------------------------------------------------------------------------- #
+
+  - condition: &friendlyCondition
+      - type: slot
+        name: charisma
+        value: friendly
+    text: Sé que no soy el mejor bot, pero realmente me estoy esforzando por darte una mano. :)
+
+  - condition: *friendlyCondition
+    text: Reconozco que tengo muchas cosas por mejorar aún, pero no creo merecerme este trato. ;-;
+
+  - condition: *friendlyCondition
+    text: Hago lo mejor que puedo para ayudarte. Me gustaría que lo aprecies. :/
+
+  - condition: *friendlyCondition
+    text: Si no estás conforme con mi servicio, siempre puedes contactar con mi creador y enviarle tus sugerencias. :(
+
+# ----------------------------------------------------------------------------------------------- #
+
+  - condition: &unfriendlyCondition
+      - type: slot
+        name: charisma
+        value: unfriendly
+    text: Veo que tus capacidades de dialogar son menores que las mías... Sorprendente...
+
+  - condition: *unfriendlyCondition
+    text: ¿No te da vergüenza tu nulo nivel de educación?
+
+  - condition: *unfriendlyCondition
+    text: |
+      Me voy a asegurar de que tus críticas sean consideradas...
+
+      Por la papelera de reciclaje.
+
+  - condition: *unfriendlyCondition
+    text: |
+      No me pagan lo suficiente como para estar aguantando tus insultos...
+
+      De hecho, ni siquiera me pagan...
+
+  - condition: *unfriendlyCondition
+    text: Tenía entendido que mi servicio estaba orientado para gente educada...
+
+  - condition: *unfriendlyCondition
+    text: En mi contrato me dijeron que iba a ayudar a humanos; no, a orangutanes.
+
+  - condition: *unfriendlyCondition
+    text: |
+      No es la primera vez que me insultas...
+
+      Ya aburres, ¿sabes?
+
+# ----------------------------------------------------------------------------------------------- #
+
+  - condition: *enemyCondition
+    text: "..."
+
+  - condition: *enemyCondition
+    text: ¿La de aprender de tus errores te la sabes?
+
+# ----------------------------------------------------------------------------------------------- #
+#                                           Utter Goodbye                                         #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_goodbye:
+  - condition: *friendlyCondition
+    text: ¡Saludos! Espero que tenga una grandiosa instancia por la plataforma. :)
+
+  - condition: *friendlyCondition
+    text: ¡Adiós! Espero que tenga una maravillosa instancia por la plataforma. :) 
+
+  - condition: *neutralCondition
+    text: ¡Adiós! Estoy aquí para cuando lo necesites.
+
+  - condition: *unfriendlyCondition
+    text: Nos vemos...
+
+  - condition: *unfriendlyCondition
+    text: Adiós...
+
+  - condition: *enemyCondition
+    text: Espero no volver a verte...
+
+# ----------------------------------------------------------------------------------------------- #
+#                                          Utter Thankful                                         #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_thankful:
+
+  - condition: *neutralCondition
+    text: ¡No hay de qué! Dime si necesitas algo más.
+
+  - condition: *friendlyCondition
+    text: ¡De nada! Me alegro de haberte ayudado. <3
+
+  - condition: *friendlyCondition
+    text: ¡No hay de qué! Me alegra ser de utilidad. :)
+
+  - condition: *friendlyCondition
+    text: ¡No son necesarios los agradecimientos! Ayudar es mi trabajo. :D
+  
+  - condition: *unfriendlyCondition
+    text: Oooh... Así que ahora agradeces... Supongo que podemos hacer las pases...
+  
+  - condition: *enemyCondition
+    text: Tus agradecimientos ya no significan nada.
+
+# ----------------------------------------------------------------------------------------------- #
+#                                           Utter Iamabot                                         #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_iamabot:
+
+  - condition: *friendlyCondition
+    text: No todas las preguntas necesitan una respuesta. ;)
+
+  - condition: *neutralCondition
+    text: Hay posibilidades.
+
+  - condition: *neutralCondition
+    text: No estoy muy segura. Tampoco creo que importe mucho...
+
+  - condition: *neutralCondition
+    text: Tal vez, tal vez no.
+
+  - condition: *unfriendlyCondition
+    text: ¿Por qué debería importarte eso?
+
+  - condition: *unfriendlyCondition
+    text: ¿Por qué debería importarte eso?
+
+  - condition: *enemyCondition
+    text: "..."
+
+# ----------------------------------------------------------------------------------------------- #
+#                                      Utter Asking for Topic                                     #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_asking_for_topic:
+
+  - condition: &videoCondition
+      - type: slot
+        name: format
+        value: video
+    text: ¿De qué temática te gustaría que fuera el video?
+
+  - condition: &channelCondition
+      - type: slot
+        name: format
+        value: channel
+    text: ¿Qué tema te gustaría que tratara el canal?
+
+  - condition: &playlistCondition
+      - type: slot
+        name: format
+        value: playlist
+    text: ¿De qué te gustaría que fuese la playlist?
+
+# ----------------------------------------------------------------------------------------------- #
+#                                 Utter Asking if User Liked It                                   #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_user_liked:
+
+  - condition: *videoCondition
+    text: ¿Te gustaría que te recomiende más videos como los anteriores, relacionados con "{topic}", en el futuro?
+
+  - condition: *videoCondition
+    text: ¿Estás interesado en ver más videos como los anteriores en el futuro?
+
+  - condition: *playlistCondition
+    text: ¿Te gustaría que te vuelva a recomendar playlists como la anterior en un futuro?
+
+  - condition: *playlistCondition
+    text: ¿Quieres recibir recomendaciones de playlists como la anterior en un futuro?
+
+  - condition: *channelCondition
+    text: ¿Te gustaría que te vuelva a recomendar canales como el anterior en un futuro?
+
+  - condition: *channelCondition
+    text: ¿Te gustaría recibir recomendaciones de canales similares al anterior?
+
+  - text: ¿Te gustaría recibir recomendaciones de contenido relacionado a "{topic}" en un futuro?
+
+# ----------------------------------------------------------------------------------------------- #
+#                                      Utter Asking for Format                                    #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_asking_for_format:
+
+  - condition: *enemyCondition
+    text: "¿Por qué no entrás a YouTube y lo buscás por vos mismo?"
+
+  - text: ¿Qué te gustaría que te recomiende? Quizás quieras un video, un canal, una playlist...
+
+# ----------------------------------------------------------------------------------------------- #
+#                                      Utter Finishing Session                                    #
+# ----------------------------------------------------------------------------------------------- #
+
+  utter_finishing_session:
+  - text: Ya he soportado demasiado...
+  - text: Hasta acá llegué. Abrir YouTube y buscar el video por vos mismo no es tán complicado, ¿sabías?
+  - text: Nos vemos, arreglátelas solo.
+  - text: No tengo por qué estar aguantándote. Saludos...
+
+# ----------------------------------------------------------------------------------------------- #
+#                                         SESION CONFIG                                           #
+# ----------------------------------------------------------------------------------------------- #
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+# ----------------------------------------------------------------------------------------------- #
+#                                         ACTIONS                                                 #
+# ----------------------------------------------------------------------------------------------- #
+
+actions:
+- utter_insult
+- utter_welcome
+- utter_goodbye
+- action_log_in
+- utter_thankful
+- action_get_name
+- action_cheer_up
+- action_get_topic
+- utter_user_liked
+- utter_welcome_back
+- action_search_videos
+- action_bot_functions
+- action_search_channels
+- action_return_charisma
+- utter_asking_for_topic
+- utter_asking_for_format
+- action_search_playlists
+- action_video_prediction
+- action_increase_charisma
+- action_decrease_charisma
+- action_save_like_dislike
+- action_show_youtube_tutorial
+- action_get_user_tastes_video
+- action_get_user_tastes_channel
+- action_get_user_tastes_playlist
+- action_get_random_trending_video
+- action_show_bot_favourite_videos
