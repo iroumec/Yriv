@@ -396,16 +396,61 @@ responses:
 
   utter_user_liked:
 
-  - condition: *videoCondition
+  - condition: *enemyCondition
+    text: ""
+  
+  - condition: &friendlyVideoCondition
+      - type: slot
+        name: format
+        value: video
+      - type: slot
+        name: charisma
+        value: friendly
     text: ¿Te gustaría que te recomiende más videos como los anteriores, relacionados con "{topic}", en el futuro?
 
-  - condition: *videoCondition
+  - condition: &neutralVideoCondition
+      - type: slot
+        name: format
+        value: video
+      - type: slot
+        name: charisma
+        value: neutral
     text: ¿Estás interesado en ver más videos como los anteriores en el futuro?
 
-  - condition: *playlistCondition
+  - condition: &unfriendlyVideoCondition
+    - type: slot
+      name: format
+      value: video
+    - type: slot
+      name: charisma
+      value: unfriendly
+    text: ¿Estás interesado en ver más videos como los anteriores en el futuro?
+
+  - condition: &friendlyPlaylistCondition
+      - type: slot
+        name: format
+        value: playlist
+      - type: slot
+        name: charisma
+        value: friendly
     text: ¿Te gustaría que te vuelva a recomendar playlists como la anterior en un futuro?
 
-  - condition: *playlistCondition
+  - condition: &neutralPlaylistCondition
+      - type: slot
+        name: format
+        value: playlist
+      - type: slot
+        name: charisma
+        value: neutral
+    text: ¿Quieres recibir recomendaciones de playlists como la anterior en un futuro?
+
+  - condition: &unfriendlyPlaylistCondition
+      - type: slot
+        name: format
+        value: playlist
+      - type: slot
+        name: charisma
+        value: unfriendly
     text: ¿Quieres recibir recomendaciones de playlists como la anterior en un futuro?
 
   - condition: *channelCondition
@@ -413,8 +458,15 @@ responses:
 
   - condition: *channelCondition
     text: ¿Te gustaría recibir recomendaciones de canales similares al anterior?
+  
+  - condition: *neutralCondition
+    text: ¿Te gustaría recibir recomendaciones de contenido relacionado a "{topic}" en un futuro?
+  
+  - condition: *friendlyCondition
+    text: ¿Te gustaría recibir recomendaciones de contenido relacionado a "{topic}" en un futuro?
 
-  - text: ¿Te gustaría recibir recomendaciones de contenido relacionado a "{topic}" en un futuro?
+  - condition: *unfriendlyCondition
+    text: ¿Te gustaría recibir recomendaciones de contenido relacionado a "{topic}" en un futuro?
 
 # ----------------------------------------------------------------------------------------------- #
 #                                      Utter Asking for Format                                    #

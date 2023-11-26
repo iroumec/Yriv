@@ -186,8 +186,7 @@ class ActionDecreaseCharisma(Action):
         charisma = tracker.get_slot('charisma')
         charisma = str(charisma)
         
-        texto = """Recuerda que ser agradecido y manejar un trato amigable hará que tu carisma se eleve.
-        Por otro lado, un trato descortés hará que esta decrezca. :)"""
+        texto = "Recuerda que ser agradecido y manejar un trato amigable hará que tu carisma se eleve. \n \nPor otro lado, un trato descortés hará que esta decrezca. :)"
         
         dispatcher.utter_message(text=f"Tu nivel de carisma es: {charisma}\n\n{texto}")
         
@@ -274,8 +273,7 @@ class ActionUserTasteVideo(Action):
                 
                 numeroVideo = random.randint(2, 9)
                 
-                dispatcher.utter_message(text=f"""Anteriormente buscaste un video relacionado con "{interes}",
-                por lo que este video parece ser acorde a tus gustos:""")
+                dispatcher.utter_message(text=f'Anteriormente buscaste un video relacionado con "{interes}", por lo que este video parece ser acorde a tus gustos:')
                 
                 lastest_video_IDs.append((videos[numeroVideo])['ID'])
                 
